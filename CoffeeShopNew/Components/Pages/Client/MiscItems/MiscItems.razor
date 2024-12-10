@@ -1,0 +1,44 @@
+@page "/Client/MiscItems"
+@using CoffeeShopNew.Components.Layout
+@using CoffeeShopNew.Models
+@using CoffeeShopNew.Services.ServiceInterfaces
+@layout ClientLayout
+
+@inject IMiscItemService MiscItemService
+
+<PageTitle>Accessories</PageTitle>
+
+<div class="container my-lg-3">
+    <h3 class="my-5 text-center">Accessories for coffee</h3>
+    @if (_miscItems == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            @foreach (var item in _miscItems)
+            {
+                <div class="col">
+                    <div class="card mx-2" style="width: 18rem;">
+                        <div class="card-body text-start align-middle">
+                            <img src="@("/" + item.Image?.Path)" class="card-img-top" alt="@item.Name">
+                            <NavLink href="@($"/Client/MiscItems/{item.Id}")"><h5 class="card-title">@item.Name</h5></NavLink>
+                            <p class="card-text">@item.Price €</p>
+                            <NavLink href="#" class="btn btn-primary">Get</NavLink>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<MiscItem>? _miscItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _miscItems = await MiscItemService.GetAllItems();
+    }
+}

@@ -1,0 +1,199 @@
+@page "/Admin/Locations"
+@using CoffeeShopNew.Models
+@using CoffeeShopNew.Services.ServiceInterfaces
+@using CoffeeShopNew.Components.Shared
+@rendermode InteractiveServer
+
+@inject IJSRuntime JSRuntime
+@inject ILocationService LocationService
+
+<PageTitle>Locations</PageTitle>
+
+<Modal Id="addLocationModal" Title="Add Location">
+    <EditForm Model="@newLocation" OnValidSubmit="@AddLocation" FormName="addLocation">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <AntiforgeryToken></AntiforgeryToken>
+        <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <InputText id="name" class="form-control" @bind-Value="newLocation.Address" required/>
+        </div>
+        <div class="mb-3">
+            <label for="weekdayHours" class="form-label">Weekday hours of work</label>
+            <InputText id="weekdayHours" class="form-control" @bind-Value="newLocation.WeekdayHours" required/>
+        </div>
+        <div class="mb-3">
+            <label for="weekendHours" class="form-label">Weekend hours of work</label>
+            <InputText id="weekendHours" class="form-control" @bind-Value="newLocation.WeekendHours" required/>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Save">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </EditForm>
+</Modal>
+
+<Modal Id="updateLocationModal" Title="Update Location">
+    <EditForm Model="@selectedLocation" OnValidSubmit="@UpdateLocation" FormName="updateLocation">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <AntiforgeryToken></AntiforgeryToken>
+        <div class="mb-3">
+            <label for="updateAddress" class="form-label">Address</label>
+            <InputText id="updateAddress" class="form-control" @bind-Value="selectedLocation.Address" required/>
+        </div>
+        <div class="mb-3">
+            <label for="updateWeekdayHours" class="form-label">Weekday hours of work</label>
+            <InputText id="updateWeekdayHours" class="form-control" @bind-Value="selectedLocation.WeekdayHours"
+                       required/>
+        </div>
+        <div class="mb-3">
+            <label for="updateWeekdayHours" class="form-label">Weekend hours of work</label>
+            <InputText id="updateWeekendHours" class="form-control" @bind-Value="selectedLocation.WeekendHours"
+                       required/>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Update">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </EditForm>
+</Modal>
+
+<Modal Id="deleteLocationModal" Title="Delete Location">
+    <p>Are you sure you want to delete this location?</p>
+    <div class="modal-footer">
+        <button class="btn btn-danger" @onclick="DeleteLocation">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</Modal>
+
+
+<div class="row my-lg-3 d-flex flex-row justify-content-center">
+    <h3 class="my-5 text-center">Locations</h3>
+
+    @if (_locations == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="row mb-3 d-flex justify-content-center">
+            <div class="col-auto">
+                <input type="text"
+                       @bind-value="FilterText"
+                       @bind-value:event="oninput"
+                       @onkeyup="HandleFilterInput"
+                       placeholder="Search..."
+                       class="form-control"/>
+            </div>
+
+            <div class="col-auto">
+                <select value="@SortBy" class="form-select" @onchange="HandleSortChange">
+                    <option value="AddressAsc">Address (A-Z)</option>
+                    <option value="AddressDesc">Address (Z-A)</option>
+                </select>
+            </div>
+        </div>
+        <table class="table table-striped w-75">
+            <thead>
+            <tr>
+                <th>Address</th>
+                <th>Weekday hours of work</th>
+                <th>Weekend hours of work</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var loc in _locations)
+            {
+                <tr>
+                    <td>@loc.Address</td>
+                    <td>@loc.WeekdayHours</td>
+                    <td>@loc.WeekendHours</td>
+                    <td>
+                        <button class="btn btn-outline-info border-1 bi bi-pencil-square" data-bs-toggle="modal"
+                                data-bs-target="#updateLocationModal"
+                                @onclick="() => {selectedLocation = loc;}"></button>
+                        <button class="btn btn-outline-danger border-1 bi bi-trash" data-bs-toggle="modal"
+                                data-bs-target="#deleteLocationModal"
+                                @onclick="() => {selectedLocation = loc;}"></button>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="5" class="text-center">
+                    <button type="button" class="btn btn-outline-primary border-1 bi bi-plus-lg" data-bs-toggle="modal"
+                            data-bs-target="#addLocationModal"></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private string FilterText { get; set; } = string.Empty;
+    private string SortBy { get; set; } = "AddressAsc";
+    
+    private List<Location>? _locations;
+    private Location newLocation = new Location(), selectedLocation = new Location();
+
+    private CancellationTokenSource? _debounceTokenSource;
+    private const int DebounceDelay = 300;
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _locations = await LocationService.GetAllLocations();
+    }
+    
+    private async Task HandleFilterInput(KeyboardEventArgs e)
+    {
+        _debounceTokenSource?.Cancel();
+        _debounceTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            await Task.Delay(DebounceDelay, _debounceTokenSource.Token);
+            await LoadCoffeeItems();
+        }
+        catch (OperationCanceledException)
+        {
+            // Ignore cancellation
+        }
+    }
+
+    private async Task HandleSortChange(ChangeEventArgs e)
+    {
+        SortBy = e.Value.ToString();
+        await LoadCoffeeItems();
+    }
+    
+    private async Task LoadCoffeeItems()
+    {
+        _locations = await LocationService.GetAllLocationsSolteredFiltered(FilterText, SortBy);
+        StateHasChanged();
+    }
+
+    private async Task AddLocation()
+    {
+        await LocationService.CreateLocation(newLocation);
+        _locations = await LocationService.GetAllLocations();
+        newLocation = new Location();
+        await JSRuntime.InvokeVoidAsync("closeModal", "#addLocationModal");
+    }
+
+    private async Task UpdateLocation()
+    {
+        await LocationService.UpdateLocation(selectedLocation);
+        _locations = await LocationService.GetAllLocations();
+        selectedLocation = new Location();
+        await JSRuntime.InvokeVoidAsync("closeModal", "#updateLocationModal");
+    }
+
+    private async Task DeleteLocation()
+    {
+        await LocationService.DeleteLocation(selectedLocation.Id);
+        _locations = await LocationService.GetAllLocations();
+        await JSRuntime.InvokeVoidAsync("closeModal", "#deleteLocationModal");
+    }
+}

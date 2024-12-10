@@ -1,0 +1,42 @@
+@page "/Client/Locations"
+@using CoffeeShopNew.Components.Layout
+@using CoffeeShopNew.Models
+@using CoffeeShopNew.Services.ServiceInterfaces
+@layout ClientLayout
+
+@inject ILocationService LocationService
+
+<PageTitle>Store locations</PageTitle>
+
+<div class="row my-lg-3 d-flex flex-row justify-content-center">
+    <h3 class="my-5 text-center">Locations</h3>
+    @if (_locations == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="mx-5" style="width: 24rem">
+            <ul class="list-group list-group-flush text-center">
+                @foreach (var location in _locations)
+                {
+                    <li class="list-group-item">
+                        <p class="mb-1"><strong>@location.Address</strong></p>
+                        <p class="mb-1">Weekdays: @location.WeekdayHours</p>
+                        <p class="mb-0">Weekend: @location.WeekendHours</p>
+                        <a href="@location.GetGoogleMapsUrl()" target="_blank" rel="noopener noreferrer" class="text-decoration-none">Get there</a>
+                    </li>
+                }
+            </ul>
+        </div>
+    }
+</div>
+
+@code {
+    private List<Location>? _locations;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _locations = await LocationService.GetAllLocations();
+    }
+}

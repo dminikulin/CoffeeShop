@@ -1,0 +1,45 @@
+@page "/Client/CoffeeItems"
+@using CoffeeShopNew.Components.Layout
+@using CoffeeShopNew.Models
+@using CoffeeShopNew.Services.ServiceInterfaces
+@layout ClientLayout
+
+@inject ICoffeeItemService CoffeeItemService
+
+<PageTitle>Coffee</PageTitle>
+
+<div class="container my-lg-3">
+    <h3 class="my-5 text-center">Coffee</h3>
+    @if (_coffeeItems == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+            @foreach (var coffee in _coffeeItems)
+            {
+                <div class="col">
+                    <div class="card mx-2" style="width: 18rem;">
+                        <div class="card-body text-start align-middle">
+                            <img src="@("/" + coffee.Image?.Path)" class="card-img-top" alt="@coffee.Name">
+                            <NavLink href="@($"/Client/CoffeeItems/{coffee.Id}")"><h5 class="card-title">@coffee.Name</h5>
+                            </NavLink>
+                            <p class="card-text">@coffee.Price €</p>
+                            <NavLink href="#" class="btn btn-primary">Get</NavLink>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
+
+@code {
+    private List<CoffeeItem>? _coffeeItems;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _coffeeItems = await CoffeeItemService.GetAllCoffeeItems();
+    }
+}

@@ -1,0 +1,50 @@
+@page "/Admin"
+@using CoffeeShopNew.Services
+@using CoffeeShopNew.Services.ServiceInterfaces
+
+@inject ICoffeeItemService CoffeeItemService
+@inject IMiscItemService MiscItemService
+@inject ILocationService LocationService
+
+<PageTitle>Admin panel</PageTitle>
+
+<div class="row my-lg-3 d-flex flex-column justify-content-center">
+    <h3 class="my-5 text-center">Admin panel</h3>
+    <div class="container" style="width: 18rem;">
+        <ul class="list-group list-group-flush my-lg-3 text-center">
+            <li class="list-group-item"><strong>Statistics: </strong></li>
+            <li class="list-group-item">Coffee items: @_coffeeCount</li>
+            <li class="list-group-item">Accessories: @_accessoryCount</li>
+            <li class="list-group-item">Locations: @_locationCount</li>
+        </ul>
+    </div>
+    <div class="container text-center w-50">
+        <div class="row gx-2">
+            <div class="col">
+                <NavLink href="/Admin/CoffeeItems" class="btn btn-primary">Manage coffee items</NavLink>
+            </div>
+            <div class="col">
+                <NavLink href="/Admin/MiscItems" class="btn btn-primary">Manage accessories</NavLink>
+            </div>
+            <div class="col">
+                <NavLink href="/Admin/Locations" class="btn btn-primary">Manage locations</NavLink>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code {
+    private int _coffeeCount = 0;
+    private int _accessoryCount = 0;
+    private int _locationCount = 0;
+
+    protected override async Task OnInitializedAsync()
+    {
+        var coffeeItems = await CoffeeItemService.GetAllCoffeeItems();
+        _coffeeCount = coffeeItems.Count;
+        var accessories = await MiscItemService.GetAllItems();
+        _accessoryCount = accessories.Count;
+        var locationCount = await LocationService.GetAllLocations();
+        _locationCount = locationCount.Count;
+    }
+}

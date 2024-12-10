@@ -1,0 +1,27 @@
+﻿@using CoffeeShopNew.Components.Layout
+
+<Router AppAssembly="typeof(Program).Assembly">
+    <Found Context="routeData">
+        <RouteView RouteData="routeData" DefaultLayout="@SelectLayout(routeData.PageType)"/>
+        <FocusOnNavigate RouteData="routeData" Selector="h1"/>
+    </Found>
+</Router>
+
+
+@code {
+    private Type SelectLayout(Type pageType)
+    {
+        // Use ClientLayout for pages in the Client namespace
+        if (pageType?.Namespace?.Contains("Client") == true)
+        {
+            return typeof(ClientLayout);
+        }
+        if (pageType?.Namespace?.Contains("Admin") == true)
+        {
+            return typeof(AdminLayout);
+        }
+
+        // Use MainLayout for everything else
+        return typeof(MainLayout);
+    }
+}

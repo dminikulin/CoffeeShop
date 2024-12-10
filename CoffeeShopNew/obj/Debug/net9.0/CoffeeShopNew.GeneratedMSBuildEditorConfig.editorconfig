@@ -1,0 +1,97 @@
+is_global = true
+build_property.TargetFramework = net9.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = CoffeeShopNew
+build_property.RootNamespace = CoffeeShopNew
+build_property.ProjectDir = /Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = 
+build_property.RazorLangVersion = 9.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = /Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew
+build_property._RazorSourceGeneratorDebug = 
+build_property.EffectiveAnalysisLevelStyle = 9.0
+build_property.EnableCodeStyleSeverity = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/App.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9BcHAucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Layout/AdminLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvQWRtaW5MYXlvdXQucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Layout/ClientLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvQ2xpZW50TGF5b3V0LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Admin/Admin.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9BZG1pbi5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Admin/CoffeeItems.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9Db2ZmZWVJdGVtcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Admin/Locations.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9Mb2NhdGlvbnMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Admin/MiscItems.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9BZG1pbi9NaXNjSXRlbXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Client/Client.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DbGllbnQvQ2xpZW50LnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Client/CoffeeItems/CoffeeItems.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DbGllbnQvQ29mZmVlSXRlbXMvQ29mZmVlSXRlbXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Client/CoffeeItems/SingleCoffeeItem.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DbGllbnQvQ29mZmVlSXRlbXMvU2luZ2xlQ29mZmVlSXRlbS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Client/Locations/Locations.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DbGllbnQvTG9jYXRpb25zL0xvY2F0aW9ucy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Client/MiscItems/MiscItems.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DbGllbnQvTWlzY0l0ZW1zL01pc2NJdGVtcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Client/MiscItems/SingleMiscItem.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9DbGllbnQvTWlzY0l0ZW1zL1NpbmdsZU1pc2NJdGVtLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Error.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9FcnJvci5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Pages/Home.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9QYWdlcy9Ib21lLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Routes.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9Sb3V0ZXMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Shared/Modal.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9TaGFyZWQvTW9kYWwucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9fSW1wb3J0cy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/Components/Layout/MainLayout.razor]
+build_metadata.AdditionalFiles.TargetPath = Q29tcG9uZW50cy9MYXlvdXQvTWFpbkxheW91dC5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-az955o45we

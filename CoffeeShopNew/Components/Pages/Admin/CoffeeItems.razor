@@ -1,0 +1,289 @@
+@page "/Admin/CoffeeItems"
+@using System.Timers
+@using CoffeeShopNew.Models
+@using CoffeeShopNew.Services.ServiceInterfaces
+@using CoffeeShopNew.Components.Shared
+@rendermode InteractiveServer
+
+@inject IJSRuntime JSRuntime
+@inject ICoffeeItemService CoffeeItemService
+@inject IWebHostEnvironment WebHostEnvironment
+
+<PageTitle>Coffee</PageTitle>
+
+<Modal Id="addCoffeeModal" Title="Add Coffee Item">
+    <EditForm Model="@newCoffeeItem" OnValidSubmit="@AddCoffeeItem" FormName="addCoffeeItem">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <AntiforgeryToken></AntiforgeryToken>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="newCoffeeItem.Name" required/>
+        </div>
+        <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <InputText id="country" class="form-control" @bind-Value="newCoffeeItem.Country" required/>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description (optional)</label>
+            <InputTextArea id="description" class="form-control" @bind-Value="newCoffeeItem.Description"/>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <InputNumber id="price" class="form-control" @bind-Value="newCoffeeItem.Price" required step="0.01"/>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Upload image (optional)</label>
+            <InputFile id="image" OnChange="HandleImageUploadForAdd"></InputFile>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Save">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </EditForm>
+</Modal>
+
+<Modal Id="updateCoffeeModal" Title="Update Coffee Item">
+    <EditForm Model="@selectedCoffeeItem" OnValidSubmit="@UpdateCoffeeItem" FormName="updateCoffeeItem">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <AntiforgeryToken></AntiforgeryToken>
+        <div class="mb-3">
+            <label for="updateName" class="form-label">Name</label>
+            <InputText id="updateName" class="form-control" @bind-Value="selectedCoffeeItem.Name" required/>
+        </div>
+        <div class="mb-3">
+            <label for="updateCountry" class="form-label">Country</label>
+            <InputText id="updateCountry" class="form-control" @bind-Value="selectedCoffeeItem.Country" required/>
+        </div>
+        <div class="mb-3">
+            <label for="updateDescription" class="form-label">Description (optional)</label>
+            <InputTextArea id="updateDescription" class="form-control" @bind-Value="selectedCoffeeItem.Description"/>
+        </div>
+        <div class="mb-3">
+            <label for="updatePrice" class="form-label">Price</label>
+            <InputNumber id="updatePrice" class="form-control" @bind-Value="selectedCoffeeItem.Price" required
+                         step="0.01"/>
+        </div>
+        <div class="mb-3">
+            <label for="updateImage" class="form-label">Change image (optional)</label>
+            <InputFile id="updateImage" OnChange="HandleImageUploadForUpdate"></InputFile>
+        </div>
+        @if (selectedCoffeeItem.Image != null && !string.IsNullOrEmpty(selectedCoffeeItem.Image.Path))
+        {
+            <div class="mb-3">
+                <img src="@selectedCoffeeItem.Image.Path" alt="Current Image" style="max-width: 150px;"/>
+            </div>
+        }
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Update"/>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </EditForm>
+</Modal>
+
+<Modal Id="deleteCoffeeModal" Title="Delete Coffee Item">
+    <p>Are you sure you want to delete this coffee item?</p>
+    <div class="modal-footer">
+        <button class="btn btn-danger" @onclick="DeleteCoffeeItem">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</Modal>
+
+<div class="row my-lg-3 d-flex flex-row justify-content-center">
+    <h3 class="my-5 text-center">Coffee items</h3>
+
+    @if (_coffeeItems == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="row mb-3 d-flex justify-content-center">
+            <div class="col-auto">
+                <input type="text"
+                       @bind-value="FilterText"
+                       @bind-value:event="oninput"
+                       @onkeyup="HandleFilterInput"
+                       placeholder="Search..."
+                       class="form-control"/>
+            </div>
+
+            <div class="col-auto">
+                <select value="@SortBy" class="form-select" @onchange="HandleSortChange">
+                    <option value="NameAsc">Name (A-Z)</option>
+                    <option value="NameDesc">Name (Z-A)</option>
+                    <option value="PriceAsc">Price (Ascending)</option>
+                    <option value="PriceDesc">Price (Descending)</option>
+                </select>
+            </div>
+        </div>
+        <table class="table table-striped w-75">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var coffee in _coffeeItems)
+            {
+                <tr>
+                    <td>
+                        <img
+                            src="@("/" + coffee.Image?.Path)"
+                            alt="@coffee.Name"
+                            style="max-width: 50px;"/>
+                    </td>
+                    <td>@coffee.Name</td>
+                    <td>@coffee.CountryCode() (@coffee.Country)</td>
+                    <td>@coffee.Description</td>
+                    <td>@coffee.Price €</td>
+                    <td>
+                        <button class="btn btn-outline-info border-1 bi bi-pencil-square" data-bs-toggle="modal"
+                                data-bs-target="#updateCoffeeModal"
+                                @onclick="() => { selectedCoffeeItem = coffee; }"></button>
+                        <button class="btn btn-outline-danger border-1 bi bi-trash" data-bs-toggle="modal"
+                                data-bs-target="#deleteCoffeeModal"
+                                @onclick="() => { selectedCoffeeItem = coffee; }"></button>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="6" class="text-center">
+                    <button type="button" class="btn btn-outline-primary border-1 bi bi-plus-lg" data-bs-toggle="modal"
+                            data-bs-target="#addCoffeeModal">
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private string FilterText { get; set; } = string.Empty;
+    private string SortBy { get; set; } = "NameAsc";
+
+    private List<CoffeeItem>? _coffeeItems;
+    private CoffeeItem newCoffeeItem = new CoffeeItem(), selectedCoffeeItem = new CoffeeItem();
+    private IFormFile? uploadedImageFileForAdd;
+    private IFormFile? uploadedImageFileForUpdate;
+    
+    private string[] allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+
+    private CancellationTokenSource? _debounceTokenSource;
+    private const int DebounceDelay = 300;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _coffeeItems = await CoffeeItemService.GetAllCoffeeItems();
+    }
+
+    private async Task HandleFilterInput(KeyboardEventArgs e)
+    {
+        _debounceTokenSource?.Cancel();
+        _debounceTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            await Task.Delay(DebounceDelay, _debounceTokenSource.Token);
+            await LoadCoffeeItems();
+        }
+        catch (OperationCanceledException)
+        {
+            // Ignore cancellation
+        }
+    }
+
+    private async Task HandleSortChange(ChangeEventArgs e)
+    {
+        SortBy = e.Value.ToString();
+        await LoadCoffeeItems();
+    }
+    
+    private async Task<IFormFile> ConvertToIFormFile(IBrowserFile browserFile)
+    {
+        var stream = new MemoryStream();
+        await browserFile.OpenReadStream().CopyToAsync(stream);
+        stream.Position = 0;
+
+        var formFile = new FormFile(stream, 0, stream.Length, browserFile.Name, browserFile.Name)
+        {
+            Headers = new HeaderDictionary(),
+            ContentType = browserFile.ContentType
+        };
+
+        return formFile;
+    }
+
+    private async Task HandleImageUploadForAdd(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        
+        if (!allowedExtensions.Any(ext => file.Name.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+        {
+            await JSRuntime.InvokeVoidAsync("alert", "Invalid file type. Only .jpg, .jpeg, .png, and files are allowed.");
+            return;
+        }
+        
+        using var stream = file.OpenReadStream();
+        var buffer = new byte[file.Size];
+        await stream.ReadAsync(buffer);
+        
+        uploadedImageFileForAdd = await ConvertToIFormFile(file);
+    }
+
+    private async Task HandleImageUploadForUpdate(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        
+        if (!allowedExtensions.Any(ext => file.Name.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+        {
+            await JSRuntime.InvokeVoidAsync("alert", "Invalid file type. Only .jpg, .jpeg, .png, and files are allowed.");
+            return;
+        }
+        
+        using var stream = file.OpenReadStream();
+        var buffer = new byte[file.Size];
+        await stream.ReadAsync(buffer);
+        
+        uploadedImageFileForUpdate = await ConvertToIFormFile(file);
+    }
+
+    private async Task LoadCoffeeItems()
+    {
+        _coffeeItems = await CoffeeItemService.GetAllCoffeeItemsSortedFiltered(FilterText, SortBy);
+        StateHasChanged();
+    }
+
+    private async Task AddCoffeeItem()
+    {
+        await CoffeeItemService.AddCoffeeItem(newCoffeeItem, uploadedImageFileForAdd);
+        _coffeeItems = await CoffeeItemService.GetAllCoffeeItems();
+        newCoffeeItem = new CoffeeItem();
+        uploadedImageFileForAdd = null;
+        await JSRuntime.InvokeVoidAsync("closeModal", "#addCoffeeModal");
+    }
+
+    private async Task UpdateCoffeeItem()
+    {
+        await CoffeeItemService.UpdateCoffeeItem(selectedCoffeeItem, uploadedImageFileForUpdate);
+        _coffeeItems = await CoffeeItemService.GetAllCoffeeItems();
+        selectedCoffeeItem = new CoffeeItem();
+        uploadedImageFileForUpdate = null;
+        await JSRuntime.InvokeVoidAsync("closeModal", "#updateCoffeeModal");
+    }
+
+    private async Task DeleteCoffeeItem()
+    {
+        await CoffeeItemService.DeleteCoffeeItem(selectedCoffeeItem.Id);
+        _coffeeItems = await CoffeeItemService.GetAllCoffeeItems();
+        await JSRuntime.InvokeVoidAsync("closeModal", "#deleteCoffeeModal");
+    }
+
+}

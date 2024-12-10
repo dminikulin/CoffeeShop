@@ -1,0 +1,229 @@
+{
+  "Files": [
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/obj/Debug/net9.0/scopedcss/projectbundle/CoffeeShopNew.bundle.scp.css",
+      "PackagePath": "staticwebassets/CoffeeShopNew.jcf7z5m8ov.bundle.scp.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/app.css",
+      "PackagePath": "staticwebassets/app.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/favicon.png",
+      "PackagePath": "staticwebassets/favicon.png"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/images/CoffeeItems/fdln450c.spu.jpg",
+      "PackagePath": "staticwebassets/images/CoffeeItems/fdln450c.spu.jpg"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/images/CoffeeItems/kvrvtycz.tg2.jpg",
+      "PackagePath": "staticwebassets/images/CoffeeItems/kvrvtycz.tg2.jpg"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/images/MiscItems/zivjafd4.2iw.jpg",
+      "PackagePath": "staticwebassets/images/MiscItems/zivjafd4.2iw.jpg"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.min.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-grid.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.min.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-reboot.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.min.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap-utilities.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.min.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/css/bootstrap.rtl.min.css.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.js.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.bundle.min.js.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.js.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.esm.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.esm.min.js.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.js.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js.map",
+      "PackagePath": "staticwebassets/lib/bootstrap/dist/js/bootstrap.min.js.map"
+    },
+    {
+      "Id": "/Users/dmytronikulin/RiderProjects/CoffeeShopNew/CoffeeShopNew/wwwroot/map.js",
+      "PackagePath": "staticwebassets/map.js"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.CoffeeShopNew.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.CoffeeShopNew.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.build.CoffeeShopNew.props",
+      "PackagePath": "build\\CoffeeShopNew.props"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildMultiTargeting.CoffeeShopNew.props",
+      "PackagePath": "buildMultiTargeting\\CoffeeShopNew.props"
+    },
+    {
+      "Id": "obj/Debug/net9.0/staticwebassets/msbuild.buildTransitive.CoffeeShopNew.props",
+      "PackagePath": "buildTransitive\\CoffeeShopNew.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

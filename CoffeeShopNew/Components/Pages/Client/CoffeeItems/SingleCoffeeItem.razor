@@ -1,0 +1,58 @@
+@page "/Client/CoffeeItems/{id:int}"
+@using CoffeeShopNew.Components.Layout
+@using CoffeeShopNew.Models
+@using CoffeeShopNew.Services
+@using CoffeeShopNew.Services.ServiceInterfaces
+@layout ClientLayout
+
+@inject ICoffeeItemService CoffeeItemService
+
+<PageTitle>Coffee</PageTitle>
+
+<div class="row my-lg-3 d-flex flex-row justify-content-center">
+    @if (_coffeeItem == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <h3 class="my-5 text-center">@_coffeeItem.Name</h3>
+        <div class="card mb-3" style="max-width: 42rem;">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="@("/" + _coffeeItem.Image?.Path)" class="img-fluid rounded-start" alt="@_coffeeItem.Name">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body text-center">
+                        <h5 class="card-title"><strong>@_coffeeItem.Price €</strong></h5>
+                        <p class="card-text">Country: @_coffeeItem.CountryCode()</p>
+                        <p class="card-text">@_coffeeItem.Description</p>
+                        <a class="btn btn-primary" href="#" role="button">Buy</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+</div>
+
+@code {
+    [Parameter] 
+    public int id { get; set; }
+
+    private CoffeeItem? _coffeeItem;
+
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            _coffeeItem = await CoffeeItemService.GetCoffeeItemById(id);
+            if (_coffeeItem == null)
+                Console.WriteLine("Coffee item not found.");
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Error fetching coffee item: {ex.Message}");
+        }
+    }
+}

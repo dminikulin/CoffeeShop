@@ -1,0 +1,276 @@
+@page "/Admin/MiscItems"
+@using CoffeeShopNew.Models
+@using CoffeeShopNew.Services.ServiceInterfaces
+@using CoffeeShopNew.Components.Shared
+@rendermode InteractiveServer
+
+@inject IJSRuntime JSRuntime
+@inject IMiscItemService MiscItemService
+
+<PageTitle>Accessories</PageTitle>
+
+<Modal Id="addMiscModal" Title="Add Accessory">
+    <EditForm Model="@newMiscItem" OnValidSubmit="@AddMiscItem" FormName="addMiscItem">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <AntiforgeryToken></AntiforgeryToken>
+        <div class="mb-3">
+            <label for="name" class="form-label">Name</label>
+            <InputText id="name" class="form-control" @bind-Value="newMiscItem.Name" required/>
+        </div>
+        <div class="mb-3">
+            <label for="description" class="form-label">Description (optional)</label>
+            <InputTextArea id="description" class="form-control" @bind-Value="newMiscItem.Description"/>
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price</label>
+            <InputNumber id="price" class="form-control" @bind-Value="newMiscItem.Price" required step="0.01"/>
+        </div>
+        <div class="mb-3">
+            <label for="image" class="form-label">Upload image (optional)</label>
+            <InputFile id="image" OnChange="HandleImageUploadForAdd"></InputFile>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Save">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </EditForm>
+</Modal>
+
+<Modal Id="updateMiscModal" Title="Update Accessory">
+    <EditForm Model="@selectedMiscItem" OnValidSubmit="@UpdateMiscItem" FormName="updateMiscItem">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <AntiforgeryToken></AntiforgeryToken>
+        <div class="mb-3">
+            <label for="updateName" class="form-label">Name</label>
+            <InputText id="updateName" class="form-control" @bind-Value="selectedMiscItem.Name" required/>
+        </div>
+        <div class="mb-3">
+            <label for="updateDescription" class="form-label">Description (optional)</label>
+            <InputTextArea id="updateDescription" class="form-control" @bind-Value="selectedMiscItem.Description"/>
+        </div>
+        <div class="mb-3">
+            <label for="updatePrice" class="form-label">Price</label>
+            <InputNumber id="updatePrice" class="form-control" @bind-Value="selectedMiscItem.Price" required
+                         step="0.01"/>
+        </div>
+        <div class="mb-3">
+            <label for="updateImage" class="form-label">Change image (optional)</label>
+            <InputFile id="updateImage" OnChange="HandleImageUploadForUpdate"></InputFile>
+        </div>
+        @if (selectedMiscItem.Image != null && !string.IsNullOrEmpty(selectedMiscItem.Image.Path))
+        {
+            <div class="mb-3">
+                <img src="@selectedMiscItem.Image.Path" alt="Current Image" style="max-width: 150px;"/>
+            </div>
+        }
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-primary" value="Update"/>
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        </div>
+    </EditForm>
+</Modal>
+
+<Modal Id="deleteMiscModal" Title="Delete Misc Item">
+    <p>Are you sure you want to delete this accessory?</p>
+    <div class="modal-footer">
+        <button class="btn btn-danger" @onclick="DeleteMiscItem">Delete</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+    </div>
+</Modal>
+
+
+<div class="row my-lg-3 d-flex flex-row justify-content-center">
+    <h3 class="my-5 text-center">Accessories</h3>
+
+    @if (_miscItems == null)
+    {
+        <p>Loading...</p>
+    }
+    else
+    {
+        <div class="row mb-3 d-flex justify-content-center">
+            <div class="col-auto">
+                <input type="text"
+                       @bind-value="FilterText"
+                       @bind-value:event="oninput"
+                       @onkeyup="HandleFilterInput"
+                       placeholder="Search..."
+                       class="form-control"/>
+            </div>
+
+            <div class="col-auto">
+                <select value="@SortBy" class="form-select" @onchange="HandleSortChange">
+                    <option value="NameAsc">Name (A-Z)</option>
+                    <option value="NameDesc">Name (Z-A)</option>
+                    <option value="PriceAsc">Price (Ascending)</option>
+                    <option value="PriceDesc">Price (Descending)</option>
+                </select>
+            </div>
+        </div>
+        <table class="table table-striped w-75">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Price</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            @foreach (var item in _miscItems)
+            {
+                <tr>
+                    <td>
+                        <img
+                            src="@("/" + item.Image?.Path)"
+                            alt="@item.Name"
+                            style="max-width: 50px;"/>
+                    </td>
+                    <td>@item.Name</td>
+                    <td>@item.Description</td>
+                    <td>@item.Price €</td>
+                    <td>
+                        <button class="btn btn-outline-info border-1 bi bi-pencil-square" data-bs-toggle="modal"
+                                data-bs-target="#updateMiscModal" @onclick="() => { selectedMiscItem = item; }"></button>
+                        <button class="btn btn-outline-danger border-1 bi bi-trash" data-bs-toggle="modal"
+                                data-bs-target="#deleteMiscModal" @onclick="() => { selectedMiscItem = item; }"></button>
+                    </td>
+                </tr>
+            }
+            <tr>
+                <td colspan="5" class="text-center">
+                    <button class="btn btn-outline-primary border-1 bi bi-plus-lg"
+                            data-bs-toggle="modal"
+                            data-bs-target="#addMiscModal">
+                    </button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    }
+</div>
+
+@code {
+    private string FilterText { get; set; } = string.Empty;
+    private string SortBy { get; set; } = "NameAsc";
+    
+    private List<MiscItem>? _miscItems;
+    private MiscItem newMiscItem = new MiscItem(), selectedMiscItem = new MiscItem();
+    private IFormFile? uploadedImageFileForAdd;
+    private IFormFile? uploadedImageFileForUpdate;
+    
+    private string[] allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+    
+    private CancellationTokenSource? _debounceTokenSource;
+    private const int DebounceDelay = 300;
+
+    protected override async Task OnInitializedAsync()
+    {
+        _miscItems = await MiscItemService.GetAllItems();
+    }
+
+    private async Task HandleFilterInput(KeyboardEventArgs e)
+    {
+        _debounceTokenSource?.Cancel();
+        _debounceTokenSource = new CancellationTokenSource();
+
+        try
+        {
+            await Task.Delay(DebounceDelay, _debounceTokenSource.Token);
+            await LoadMiscItems();
+        }
+        catch (OperationCanceledException)
+        {
+            // Ignore cancellation
+        }
+    }
+    
+    private async Task HandleSortChange(ChangeEventArgs e)
+    {
+        SortBy = e.Value.ToString();
+        await LoadMiscItems();
+    }
+    
+    private async Task<IFormFile> ConvertToIFormFile(IBrowserFile browserFile)
+    {
+        var stream = new MemoryStream();
+        await browserFile.OpenReadStream().CopyToAsync(stream);
+        stream.Position = 0;
+
+        var formFile = new FormFile(stream, 0, stream.Length, browserFile.Name, browserFile.Name)
+        {
+            Headers = new HeaderDictionary(),
+            ContentType = browserFile.ContentType
+        };
+
+        return formFile;
+    }
+
+    private async Task HandleImageUploadForAdd(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        
+        if (!allowedExtensions.Any(ext => file.Name.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+        {
+            await JSRuntime.InvokeVoidAsync("alert", "Invalid file type. Only .jpg, .jpeg, .png, and files are allowed.");
+            return;
+        }
+        
+        using var stream = file.OpenReadStream();
+        var buffer = new byte[file.Size];
+        await stream.ReadAsync(buffer);
+        
+        uploadedImageFileForAdd = await ConvertToIFormFile(file);
+    }
+
+    private async Task HandleImageUploadForUpdate(InputFileChangeEventArgs e)
+    {
+        var file = e.File;
+        
+        if (!allowedExtensions.Any(ext => file.Name.EndsWith(ext, StringComparison.OrdinalIgnoreCase)))
+        {
+            await JSRuntime.InvokeVoidAsync("alert", "Invalid file type. Only .jpg, .jpeg, .png, and files are allowed.");
+            return;
+        }
+        
+        using var stream = file.OpenReadStream();
+        var buffer = new byte[file.Size];
+        await stream.ReadAsync(buffer);
+        
+        uploadedImageFileForUpdate = await ConvertToIFormFile(file);
+    }
+
+    private async Task LoadMiscItems()
+    {
+        _miscItems = await MiscItemService.GetAllItemsSortedFiltered(FilterText, SortBy);
+        StateHasChanged();
+    }
+
+    private async Task AddMiscItem()
+    {
+        await MiscItemService.AddItem(newMiscItem, uploadedImageFileForAdd);
+        _miscItems = await MiscItemService.GetAllItems();
+        newMiscItem = new MiscItem();
+        uploadedImageFileForAdd = null;
+        await JSRuntime.InvokeVoidAsync("closeModal", "#addMiscModal");
+    }
+
+    private async Task UpdateMiscItem()
+    {
+        await MiscItemService.UpdateItem(selectedMiscItem, uploadedImageFileForUpdate);
+        _miscItems = await MiscItemService.GetAllItems();
+        selectedMiscItem = new MiscItem();
+        uploadedImageFileForUpdate = null;
+        await JSRuntime.InvokeVoidAsync("closeModal", "#updateMiscModal");
+    }
+
+    private async Task DeleteMiscItem()
+    {
+        await MiscItemService.DeleteItem(selectedMiscItem.Id);
+        _miscItems = await MiscItemService.GetAllItems();
+        await JSRuntime.InvokeVoidAsync("closeModal", "#deleteMiscModal");
+    }
+}
